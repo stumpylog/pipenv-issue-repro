@@ -9,8 +9,7 @@ verify_ssl = true
 name = "piwheels"
 
 [packages]
-django = "~=4.0"
-
+asgiref = "==3.5.2"
 
 [dev-packages]
 
