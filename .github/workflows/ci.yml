@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+
+jobs:
+  pipenv-1012:
+    name: "Working"
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Install pipenv
+        run: |
+          pipx install pipenv==2022.10.12
+      -
+        name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+          cache: "pipenv"
+          cache-dependency-path: 'Pipfile.lock'
+      -
+        name: Install dependencies
+        run: |
+          pipenv sync --dev
+      -
+        name: List installed Python dependencies
+        run: |
+          pipenv run pip list
+  pipenv-1025:
+    name: "Not Working"
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Install pipenv
+        run: |
+          pipx install pipenv==2022.10.25
+      -
+        name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+          cache: "pipenv"
+          cache-dependency-path: 'Pipfile.lock'
+      -
+        name: Install dependencies
+        run: |
+          pipenv sync --dev
+      -
+        name: List installed Python dependencies
+        run: |
+          pipenv run pip list
